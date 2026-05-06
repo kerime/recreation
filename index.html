@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#12151a">
+  <title>Neon Phase Tactics</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Neon Phase Tactics</p>
+        <h1>フェイズ管理タクティクス</h1>
+      </div>
+      <div class="meters" aria-label="現在の資源">
+        <span>Day <b id="day">1</b></span>
+        <span>資金 <b id="money">0</b></span>
+        <span>TP <b id="tp">0</b></span>
+        <span>部屋 <b id="rooms">0</b></span>
+      </div>
+    </header>
+
+    <main class="layout">
+      <nav class="side" aria-label="画面切り替え">
+        <button class="nav active" data-view="base">拠点</button>
+        <button class="nav" data-view="people">クルー</button>
+        <button class="nav" data-view="members">チーム</button>
+        <button class="nav" data-view="market">イベント</button>
+        <button class="nav" data-view="dungeon">探索</button>
+        <button class="nav" data-view="analysis">概要</button>
+      </nav>
+
+      <section class="content">
+        <section id="base" class="view active" aria-labelledby="base-title">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Agit Phase</p>
+              <h2 id="base-title">拠点メニュー</h2>
+            </div>
+            <button id="nextDay">次の日へ</button>
+          </div>
+          <div class="grid two">
+            <section class="panel">
+              <h3>今日の方針</h3>
+              <p id="todo" class="todo"></p>
+              <div class="actions">
+                <button id="socialize">交流</button>
+                <button id="buyRoom">部屋 +1</button>
+                <button id="saveGame">セーブ</button>
+                <button id="loadGame">ロード</button>
+                <button id="resetGame">リセット</button>
+              </div>
+            </section>
+            <section class="panel">
+              <h3>予定表</h3>
+              <div id="schedule" class="schedule"></div>
+            </section>
+          </div>
+          <div class="log" id="log" aria-live="polite"></div>
+        </section>
+
+        <section id="people" class="view" aria-labelledby="people-title">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Resource Roster</p>
+              <h2 id="people-title">クルー管理</h2>
+            </div>
+            <button id="trainSelected">選択クルーを訓練</button>
+          </div>
+          <div id="peopleList" class="cards"></div>
+        </section>
+
+        <section id="members" class="view" aria-labelledby="members-title">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Battle Party</p>
+              <h2 id="members-title">チーム編成</h2>
+            </div>
+            <button id="healParty">チーム回復</button>
+          </div>
+          <div id="memberList" class="cards"></div>
+        </section>
+
+        <section id="market" class="view" aria-labelledby="market-title">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Matching Phase</p>
+              <h2 id="market-title">イベント運営</h2>
+            </div>
+            <button id="startMarket">イベント開始</button>
+          </div>
+          <div class="grid two">
+            <section class="panel">
+              <h3>来場者</h3>
+              <div id="customers" class="stack"></div>
+            </section>
+            <section class="panel">
+              <h3>配置プレビュー</h3>
+              <div id="stands" class="stack"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="dungeon" class="view" aria-labelledby="dungeon-title">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Dungeon Phase</p>
+              <h2 id="dungeon-title">探索チャレンジ</h2>
+            </div>
+            <button id="newDungeon">新しいマップ</button>
+          </div>
+          <div class="grid battle-layout">
+            <section class="panel">
+              <h3>マップ</h3>
+              <div id="map" class="map"></div>
+            </section>
+            <section class="panel battle-panel">
+              <h3>バトル</h3>
+              <div id="battle" class="battle"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="analysis" class="view" aria-labelledby="analysis-title">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Design Notes</p>
+              <h2 id="analysis-title">完成版の内容</h2>
+            </div>
+          </div>
+          <div class="analysis-body">
+            <section class="panel">
+              <h3>実装済みループ</h3>
+              <ul>
+                <li>拠点で資源、予定、交流、部屋拡張、セーブ/ロードを管理。</li>
+                <li>クルーはAPL/TEC/FOC/DEFを持ち、イベントで収益と成長に影響。</li>
+                <li>チームはPOW/TEC/SPD、HP/MP/VPを持ち、探索バトルで行動。</li>
+                <li>探索は5x3マップ、隣接移動、敵、強敵、救出、イベント、宝箱、クリアで構成。</li>
+                <li>バトルは速度順ターン、弱点、全体攻撃、VP技、ガード、交代、撤退に対応。</li>
+              </ul>
+            </section>
+            <section class="panel">
+              <h3>ビジュアル</h3>
+              <p>背景とポートレートはGPT Image 2.0相当の生成ワークフローで作り直したオリジナル素材を使用しています。</p>
+            </section>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
